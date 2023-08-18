@@ -32,6 +32,17 @@ function calculateRectangleArea () {
     const lengthValueText = lengthField.value;
     const length = parseFloat(lengthValueText);
 
+
+    // validate input
+    if (isNaN(width)) {
+        alert('please provide  a number');
+        return;
+    }
+    if (isNaN(length)) {
+        alert('please provide  a number');
+        return;
+    }
+
     const area = width * length;
     const areaRectangle = document.getElementById('rectangle-area');
     areaRectangle.innerText = area;
@@ -52,6 +63,9 @@ function calculateParallelogramArea() {
     const height = getInputValue('parallelogram-hight');
     const area = base * height;
     setElementInnerText('parallelogram-area', area);
+
+    // add to calculation entry
+    addToCalculationEntry('parallelogram', area);
 }
 
 
@@ -67,3 +81,31 @@ function setElementInnerText(elementId,area) {
     const element = document.getElementById(elementId);
     element.innerText = area;
 }
+
+// added the calculation  entry
+/*
+1. get the element where you want to add the dynamic html
+2. create an element you want to add
+3. if needed add some class
+4. set innerHtml. it could be dynamic Template string
+5. append the created element as a child of the parent.
+*/
+
+function addToCalculationEntry(areaType, area) {
+    const calculationEntry = document.getElementById('calculation-entry');
+    const p = document.createElement('p');
+    p.innerHTML = areaType+ ' '+area;
+    calculationEntry.appendChild(p);
+
+}
+
+
+
+//data validation
+/*
+1. set the  proper type of the input field. (number,data,email)
+2. check type using typeof
+3. NaN means: not a number. isNaN is chech\king wether the input is not a number or not
+
+
+*/
